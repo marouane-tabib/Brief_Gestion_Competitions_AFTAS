@@ -11,7 +11,6 @@ public record HuntingRequestDTO(
         Long competitionId,
         Long memberId,
         Long fishId,
-
         @NotNull(message = "Weight is required")
         @Min(value = 1, message = "Weight must be greater than 0")
         double weight

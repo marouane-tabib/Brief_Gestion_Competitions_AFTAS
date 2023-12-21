@@ -74,5 +74,4 @@ public class CompetitionController {
         Ranking ranking = competitionService.registerMemberForCompetition(registerMemberRequest.toRanking());
         return ResponseMessage.ok(ranking,"Member registered successfully");
     }
-
 }

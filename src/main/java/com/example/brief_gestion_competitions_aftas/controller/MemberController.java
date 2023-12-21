@@ -74,5 +74,4 @@ public class MemberController {
             return ResponseMessage.ok(null, "Member deleted successfully");
         }
     }
-
 }

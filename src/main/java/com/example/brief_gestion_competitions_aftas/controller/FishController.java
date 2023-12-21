@@ -23,9 +23,9 @@ public class FishController {
     @GetMapping("{id}")
     public ResponseEntity getFishById(@PathVariable Long id) {
         Fish fish = fishService.getFishById(id);
-        if(fish == null) {
+        if (fish == null) {
             return ResponseMessage.notFound("Fish not found");
-        }else {
+        } else {
             return ResponseMessage.ok(fish, "Success");
         }
     }
@@ -65,7 +65,7 @@ public class FishController {
         Fish fish = fishService.getFishById(id);
         if(fish == null) {
             return ResponseMessage.notFound("Fish not found");
-        }else {
+        } else {
             fishService.deleteFish(id);
             return ResponseMessage.ok(null,"Fish deleted successfully");
         }

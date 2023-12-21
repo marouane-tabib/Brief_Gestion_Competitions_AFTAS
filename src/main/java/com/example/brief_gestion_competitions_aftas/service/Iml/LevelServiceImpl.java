@@ -30,7 +30,10 @@ public class LevelServiceImpl implements LevelService {
 
     @Override
     public Level addLevel(Level level) {
-        Level levels = levelRepository.findAll().stream().max((l1, l2) -> l1.getPoint() > l2.getPoint() ? 1 : -1).orElse(null);
+        Level levels = levelRepository.findAll()
+                .stream()
+                .max((l1, l2) -> l1.getPoint() > l2.getPoint() ? 1 : -1)
+                .orElse(null);
         if (levels != null) {
             if (level.getPoint() <= levels.getPoint()) {
                 throw new OperationException("Point must be greater than " + levels.getPoint());

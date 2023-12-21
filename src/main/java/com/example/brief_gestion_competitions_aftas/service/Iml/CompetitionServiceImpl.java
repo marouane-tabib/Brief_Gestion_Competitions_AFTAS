@@ -21,7 +21,6 @@ import java.util.List;
 public class CompetitionServiceImpl implements CompetitionService {
 
     private final CompetitionRepository competitionRepository;
-
     private RankingRepository rankingRepository;
     private final MemberService memberService;
 
@@ -123,24 +122,24 @@ public class CompetitionServiceImpl implements CompetitionService {
     public Ranking registerMemberForCompetition(Ranking ranking1) {
         Long competitionId = ranking1.getCompetition().getId();
         Long memberId = ranking1.getMember().getId();
+
         // here i want to check that the competition is exist
         Competition competition = getCompetitionById(competitionId);
-        if(competition == null){
-            throw new ResourceNotFoundException("Competition id " + competitionId + " not found");
-        }
+
         // here i want to check that the member is exist
         Member member = memberService.getMemberById(memberId);
-        if(member == null){
-            throw new ResourceNotFoundException("Member id " + memberId + " not found");
-        }
+
         // here i want to check that the member is not already registered for the competition
         if(competition.getRanking().stream().anyMatch(ranking -> ranking.getMember().getId().equals(memberId))){
             throw new OperationException("Member id " + memberId + " is already registered for the competition");
         }
+
         // here i want to check that the competition is not started yet and are still have 24 hours before the start time
         if(competition.getStartTime().isBefore(competition.getStartTime().minusHours(24))){
             throw new OperationException("Competition id " + competitionId + " is closed for registration");
         }
+
+
         // here i want to register the member for the competition
         return rankingRepository.save(ranking1);
     }
